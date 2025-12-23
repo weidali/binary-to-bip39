@@ -1,1 +1,1 @@
-# No external dependencies (stdlib only)
+windows-curses; platform_system == "Windows"

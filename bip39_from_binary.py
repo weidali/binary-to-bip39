@@ -1,6 +1,6 @@
 import hashlib
 import curses
-from datetime import datetime
+from datetime import datetime, timezone
 from interactive_input import interactive_entropy_input
 
 
@@ -42,7 +42,7 @@ def invert_entropy(entropy: str) -> str:
 def log_entropy(entropy, entropy_inv, mnemonic, mnemonic_inv):
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write("\n" + "=" * 60 + "\n")
-        f.write(f"Timestamp (UTC): {datetime.utcnow().isoformat()}\n")
+        f.write(f"Timestamp (UTC): {datetime.now(timezone.utc).isoformat()}\n")
         f.write(f"Entropy length : {len(entropy)} bits\n\n")
         f.write("Original entropy:\n" + entropy + "\n\n")
         f.write("Inverted entropy:\n" + entropy_inv + "\n\n")

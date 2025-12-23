@@ -30,13 +30,21 @@
 
 Бинарная строка **должна состоять только из `0` и `1`**.
 
+## 📦 Зависимости
+
+- Python 3.8+
+- Linux / macOS: без дополнительных библиотек
+- Windows:
+  ```bash
+  pip install windows-curses
+
 ---
 
 ## 🚀 Установка
 
 ### 1. Клонировать репозиторий
 ```bash
-git clone https://github.com/YOUR_USERNAME/binary-to-bip39.git
+git clone https://github.com/weidali/binary-to-bip39.git
 cd binary-to-bip39
 ```
 
@@ -52,5 +60,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 deactivate
+```
 
+## Run
+
+```bash
+python bip39_from_binary.py
 ```
