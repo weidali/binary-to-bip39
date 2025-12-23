@@ -9,3 +9,6 @@ __pycache__/
 # IDE
 .idea/
 .vscode/
+
+# Log files
+entropy_log.txt
