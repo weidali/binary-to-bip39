@@ -1,0 +1,27 @@
+---
+
+## 📄 `bip39_from_binary.py`
+
+(тот код, который мы уже написали — можно вставить без изменений)
+
+---
+
+## 📄 `wordlist.txt`
+
+Официальный BIP-39 English Wordlist  
+Источник: Bitcoin Improvement Proposal 39
+
+👉 https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
+
+(Скопировать содержимое целиком)
+
+---
+
+## 📄 `LICENSE` (MIT)
+
+```text
+MIT License
+
+Copyright (c) 2025
+
+Permission is hereby granted, free of charge, to any person obtaining a copy...
