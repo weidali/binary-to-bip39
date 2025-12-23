@@ -38,3 +38,19 @@
 ```bash
 git clone https://github.com/YOUR_USERNAME/binary-to-bip39.git
 cd binary-to-bip39
+```
+
+## Виртуальное окружение (venv)
+
+Рекомендуется использовать виртуальное окружение Python.
+
+### Linux / macOS
+```bash
+python3 -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+deactivate
+
+```
