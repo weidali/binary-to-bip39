@@ -2,8 +2,9 @@ import hashlib
 import curses
 from datetime import datetime, timezone
 from interactive_input import interactive_entropy_input
+import secrets
 
-
+__version__ = "0.9.1"
 LOG_FILE = "entropy_log.txt"
 WORDLIST = "bip-0039-wordlists-en.txt"
 
@@ -63,6 +64,7 @@ def choose_mode() -> str:
     print("\nChoose input mode:")
     print("1) Interactive (step-by-step)")
     print("2) Direct binary input")
+    print("3) Auto-generate entropy (secure)")
 
     return input("> ").strip()
 
@@ -100,7 +102,36 @@ def preflight_checks():
     return True
 
 
+def generate_entropy(bits: int) -> str:
+    """
+    Generate entropy using pairwise random bits
+    with mutual exclusion (von Neumann extractor).
+    """
+    entropy = ""
+
+    while len(entropy) < bits:
+        a = secrets.randbits(1)
+        b = secrets.randbits(1)
+
+        if a == b:
+            continue  # mutual exclusion
+
+        # 01 -> 0, 10 -> 1
+        entropy += "0" if (a == 0 and b == 1) else "1"
+
+    return entropy
+
+
+def xor_mix(entropy: str) -> str:
+    mixed = ""
+    for i in range(len(entropy)):
+        mixed += str(int(entropy[i]) ^ int(entropy[-(i + 1)]))
+    return mixed
+
+
 def main():
+    print(f"binary-to-bip39 v{__version__}")
+
     if not preflight_checks():
         return
 
@@ -110,7 +141,7 @@ def main():
         return
 
     mode = choose_mode()
-    if mode not in ("1", "2"):
+    if mode not in ("1", "2", "3"):
         print("Invalid mode")
         return
 
@@ -124,12 +155,23 @@ def main():
         except Exception as e:
             print("Error during interactive input:", e)
             return
-    else:
+
+    elif mode == "2":
         try:
             entropy = direct_entropy_input(bits)
         except ValueError as e:
             print("Error:", e)
             return
+
+    elif mode == "3":
+        print("\nGenerating entropy automatically...")
+        entropy = generate_entropy(bits)
+        entropy = xor_mix(entropy)
+        print("Entropy generated.")
+
+    else:
+        print("Invalid mode")
+        return
 
     entropy_inv = invert_entropy(entropy)
     wordlist = load_wordlist()

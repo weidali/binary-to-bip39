@@ -1,6 +1,6 @@
 # Binary to BIP-39 Mnemonic Generator
 
-![Version](https://img.shields.io/badge/version-0.9.0-blue)
+![version](https://img.shields.io/badge/version-0.9.1-blue)
 
 Консольный Python-скрипт для преобразования бинарной строки (0 и 1)  
 в BIP-39 мнемоническую фразу (seed phrase).
